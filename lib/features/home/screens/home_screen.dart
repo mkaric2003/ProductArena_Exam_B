@@ -47,17 +47,42 @@ class _HomeScreenState extends State<HomeScreen> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
+                        titleTextStyle: TextStyle(
+                          fontSize: 32,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black,
+                        ),
                         title: Text('Log Out'),
                         content: Text(
-                            'Are you sure you want to log out form the console?'),
+                          'Are you sure you want to log out form the console?',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                          ),
+                        ),
                         actions: [
                           TextButton(
                             onPressed: () => Navigator.of(context).pop(false),
-                            child: Text('Cancel'),
+                            child: Text(
+                              'Cancel',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black,
+                              ),
+                            ),
                           ),
                           TextButton(
                             onPressed: logOut,
-                            child: Text('Yes'),
+                            child: Text(
+                              'Yes',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black,
+                              ),
+                            ),
                           ),
                         ],
                       );
