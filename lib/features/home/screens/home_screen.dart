@@ -42,7 +42,27 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             IconButton(
-              onPressed: logOut,
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text('Log Out'),
+                        content: Text(
+                            'Are you sure you want to log out form the console?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.of(context).pop(false),
+                            child: Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: logOut,
+                            child: Text('Yes'),
+                          ),
+                        ],
+                      );
+                    });
+              },
               icon: Icon(
                 Icons.logout,
                 color: Colors.black,
