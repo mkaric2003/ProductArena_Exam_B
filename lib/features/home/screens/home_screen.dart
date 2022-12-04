@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:product_arena_fullstack_exam_b/constants/global_variables.dart';
 import 'package:product_arena_fullstack_exam_b/features/auth/screens/login_screen.dart';
+import 'package:product_arena_fullstack_exam_b/features/auth/services/auth_service.dart';
 import 'package:product_arena_fullstack_exam_b/features/home/widgets/doctor_info.dart';
 import 'package:product_arena_fullstack_exam_b/features/home/widgets/patients_for_tomorrow.dart';
 import 'package:product_arena_fullstack_exam_b/models/user.dart';
@@ -18,12 +19,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final AuthService authService = AuthService();
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
 
     void logOut() {
-      Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+      authService.logOut(context);
     }
 
     return Scaffold(

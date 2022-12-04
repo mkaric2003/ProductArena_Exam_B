@@ -1,7 +1,9 @@
-// ignore_for_file: unused_import, body_might_complete_normally_nullable
+// ignore_for_file: unused_import, body_might_complete_normally_nullable, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:product_arena_fullstack_exam_b/common/widgets/custome_textfield.dart';
+import 'package:product_arena_fullstack_exam_b/features/auth/screens/signup_screen.dart';
+import 'package:product_arena_fullstack_exam_b/features/auth/services/auth_service.dart';
+import 'package:product_arena_fullstack_exam_b/features/auth/widgets/custom_button.dart';
 import 'package:product_arena_fullstack_exam_b/features/home/screens/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -13,6 +15,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final AuthService authService = AuthService();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final FocusNode passwordFocusNode = FocusNode();
@@ -31,6 +34,14 @@ class _LoginScreenState extends State<LoginScreen> {
     passwordController.dispose();
     passwordFocusNode.dispose();
     super.dispose();
+  }
+
+  void logInUser() {
+    authService.signInUser(
+      context: context,
+      email: emailController.text,
+      password: passwordController.text,
+    );
   }
 
   @override
@@ -87,8 +98,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Unesi e-mail';
-                        } else if (value != 'career@tech387.com') {
-                          return 'Unesi ispravan email';
                         }
                       },
                     ),
@@ -132,37 +141,41 @@ class _LoginScreenState extends State<LoginScreen> {
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Unesi password';
-                        } else if (value != 'Pass123!') {
-                          return 'Unesi ispravan password';
                         }
                       },
                     ),
-                    Container(
-                      padding: EdgeInsets.only(
-                        top: deviceSize.height * 0.028,
-                      ),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: const Color.fromRGBO(4, 231, 98, 1),
-                          elevation: 5,
-                          minimumSize:
-                              Size(MediaQuery.of(context).size.width * 0.9, 45),
+                    CustomButton(
+                      onTap: logInUser,
+                      text: 'Log In',
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Don\'t have an account?',
+                          style: TextStyle(color: Colors.black),
                         ),
-                        onPressed: () {
-                          if (_loginFormKey.currentState!.validate()) {
+                        SizedBox(
+                          width: 3,
+                        ),
+                        InkWell(
+                          onTap: () {
                             Navigator.of(context)
-                                .pushReplacementNamed(HomeScreen.routeName);
-                          }
-                        },
-                        child: const Text(
-                          'Log in',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.black,
+                                .pushReplacementNamed(SignUpScreen.routeName);
+                          },
+                          child: const Text(
+                            'Sign Up',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromRGBO(4, 231, 98, 1),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
+                      ],
+                    )
                   ],
                 ),
               ),

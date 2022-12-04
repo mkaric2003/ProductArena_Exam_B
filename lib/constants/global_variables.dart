@@ -1,12 +1,8 @@
 import 'package:product_arena_fullstack_exam_b/models/patient.dart';
-import 'package:product_arena_fullstack_exam_b/models/user.dart';
+
+String uri = 'http://192.168.0.18:3000';
 
 class GlobalVariables {
-  static Doctor doca = Doctor(
-    avatarUrl: 'assets/images/profile.png',
-    name: 'Mirza',
-  );
-
   static List<Patient> today = [
     Patient(
       name: 'Alen K.',
